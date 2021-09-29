@@ -1,12 +1,14 @@
 # amazon-cognito
 Repository for describing how to use Amazon Cognito
 
-## Preparation
+## I. Prepare
 ```sh
 brew install jq
 ```
 
-## Setup
+&nbsp;
+
+## II. Setup
 ### Create User Pool named `test-user-pool`
 ```sh
 aws cognito-idp create-user-pool --pool-name test-user-pool > create-user-pool.json
@@ -38,7 +40,9 @@ aws cognito-idp sign-up --client-id {CLIENT_ID} --username tester --password t8s
 aws cognito-idp admin-confirm-sign-up --user-pool-id {USER_POOL_ID} --username tester
 ```
 
-## Authenticate
+&nbsp;
+
+## III. Authenticate
 ### Initiate Authentication for `tester`
 ```sh
 aws cognito-idp admin-initiate-auth \
