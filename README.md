@@ -1,58 +1,59 @@
-# sakaba-admin
-## Deploy
-- Automatically deployed by GitHub action upon commit to main branch.
+# amazon-cognito
+Repository for describing how to use Amazon Cognito
 
-&nbsp;
-
-## Run locally
-### Create .env file
+## I. Prepare
 ```sh
-USER_POOL_ID=xxx
-CLIENT_ID=xxx
-API_KEY=xxx
-```
-### Install npm packages
-```sh
-npm install
-```
-### Build
-```sh
-npm run build
-```
-## Start
-```sh
-npm start
+brew install jq
 ```
 
 &nbsp;
 
-## User Management
-### Set user's permanent password
+## II. Setup
+### Create User Pool named `test-user-pool`
 ```sh
-aws cognito-idp admin-set-user-password --user-pool-id "USER_POOL_ID"  --username "USER_NAME" --password "NEW_PASSWORD" --permanent
+aws cognito-idp create-user-pool --pool-name test-user-pool > create-user-pool.json
 ```
 
-### Set user's gender
+### Display User Pool ID
 ```sh
-sampleFrontend4Cognito % aws cognito-idp admin-update-user-attributes \
---user-pool-id "USER_POOL_ID" \
---username "USER_NAME" \
---user-attributes Name="gender",Value="male"
+cat create-user-pool.json | jq -r .UserPool.Id
 ```
 
-### Set user's given name
+### Create User Pool Client named `test-user-pool-client`
 ```sh
-aws cognito-idp admin-update-user-attributes \
---user-pool-id "USER_POOL_ID" \
---username "USER_NAME" \
---user-attributes Name="given_name",Value="Yukitaka"
+aws cognito-idp create-user-pool-client --user-pool-id {USER_POOL_ID} --client-name test-user-pool-client \
+--explicit-auth-flows "ALLOW_REFRESH_TOKEN_AUTH" "ALLOW_ADMIN_USER_PASSWORD_AUTH" > create-user-pool-client.json
 ```
 
-### Set user's family name
+### Display User Pool Client ID
 ```sh
-aws cognito-idp admin-update-user-attributes \
---user-pool-id "USER_POOL_ID" \
---username "USER_NAME" \
---user-attributes Name="family_name",Value="Maeda" 
+cat create-user-pool-client.json | jq -r .UserPoolClient.ClientId
 ```
 
+### Register User named `tester`
+```sh
+aws cognito-idp sign-up --client-id {CLIENT_ID} --username tester --password t8stP@ssw0rd
+```
+
+### Confirm Registered User named `tester`
+```sh
+aws cognito-idp admin-confirm-sign-up --user-pool-id {USER_POOL_ID} --username tester
+```
+
+&nbsp;
+
+## III. Authenticate
+### Initiate Authentication for `tester`
+```sh
+aws cognito-idp admin-initiate-auth \
+    --user-pool-id {USER_POOL_ID} \
+    --client-id {CLIENT_ID} \
+    --auth-flow "ADMIN_USER_PASSWORD_AUTH" \
+    --auth-parameters USERNAME=tester,PASSWORD=t8stP@ssw0rd \
+    > admin-initiate-auth.json
+```
+
+### Display ID Token
+```sh
+cat admin-initiate-auth.json | jq -r .AuthenticationResult.IdToken
+```
