@@ -23,16 +23,15 @@ module.exports = {
       historyApiFallback: true,
       open: true,
       static: {
-        directory: path.join(__dirname, 'public'),
+        directory: __dirname
       },
-      compress: true,
-      port: 9000,
+      compress: true
   },
   plugins: [
     new dotenv()
   ],
   output: {
-      path: path.resolve(__dirname, 'public'),
+      path: __dirname,
       filename: 'bundle.js'
   }
 }
