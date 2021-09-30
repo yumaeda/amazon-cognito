@@ -48,7 +48,7 @@ aws cognito-idp admin-confirm-sign-up --user-pool-id {USER_POOL_ID} --username t
 aws cognito-idp admin-initiate-auth \
     --user-pool-id {USER_POOL_ID} \
     --client-id {CLIENT_ID} \
-    --auth-flow "ADMIN_USER_PASSWORD_AUTH" \
+    --auth-flow "ADMIN_USER_PASSWORD_AUTH" "USER_SRP_AUTH" \
     --auth-parameters USERNAME=tester,PASSWORD=t8stP@ssw0rd \
     > admin-initiate-auth.json
 ```
