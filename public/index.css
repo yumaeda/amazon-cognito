@@ -1,0 +1,23 @@
+.body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+
+.contents {
+    text-align: center;
+    padding: 40px;
+}
+
+.input {
+    width: 180px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.button {
+    width: 200px;
+    padding: 10px;
+    -webkit-appearance: none;
+    background-color: darkred;
+    color: whitesmoke;
+}

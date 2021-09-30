@@ -1,0 +1,37 @@
+{
+  "name": "amazon-cognito",
+  "version": "1.0.0",
+  "description": "Repository for Amazon Cognito Demo",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yumaeda/amazon-cognito.git"
+  },
+  "scripts": {
+    "build": "webpack --progress --profile",
+    "start": "webpack serve"
+  },
+  "keywords": [
+    "cognito"
+  ],
+  "author": "Yukitaka Maeda",
+  "bugs": {
+    "url": "https://github.com/yumaeda/amazon-cognito/issues"
+  },
+  "homepage": "https://github.com/yumaeda/amazon-cognito#readme",
+  "dependencies": {
+    "amazon-cognito-identity-js": "^5.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "dotenv-webpack": "^7.0.3",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.4.3",
+    "webpack": "^5.55.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.3.0"
+  }
+}
