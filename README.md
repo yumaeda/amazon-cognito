@@ -2,6 +2,7 @@
 Repository for describing how to use Amazon Cognito
 
 ## I. Prepare
+### Install [jq](https://stedolan.github.io/jq/)
 ```sh
 brew install jq
 ```
