@@ -14,8 +14,4 @@ const getCognitoUser = (Username: string): CognitoUser => {
     })
 }
 
-const getCurrentUser = (): CognitoUser | null => {
-    return getUserPool().getCurrentUser()
-}
-
-export { AuthenticationDetails, getCognitoUser, getCurrentUser }
+export { AuthenticationDetails, getCognitoUser }
